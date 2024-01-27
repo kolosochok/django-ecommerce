@@ -1,0 +1,288 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}{{ vendor.title }}{% endblock title %}
+
+{% block content %}
+{% include 'partials/hero-section.html' %}
+
+<!-- Vendor Detail Section Start -->
+<section>
+  <div class="container">
+    <!-- <div class="row">
+      <div class="col">
+        <nav aria-label="breadcrumb" class="bg-light rounded-3 p-3 mb-4">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="#">User</a></li>
+            <li class="breadcrumb-item active" aria-current="page">User Profile</li>
+          </ol>
+        </nav>
+      </div>
+    </div> -->
+
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="card mb-4">
+          <div class="card-body text-center">
+            <img src="{{ vendor.image.url }}" alt="avatar"
+              class=" img-fluid" style="width: 150px;">
+            <h5 class="my-3">{{ vendor.title }}</h5>
+            <p class="text-muted mb-1">On our marketplace</p>
+            <p class="text-muted mb-4">Since {{vendor.date|date:'Y'}}</p>
+            <div class="d-flex justify-content-center mb-2">
+              <!-- <button type="button" class="btn btn-primary">Follow</button> -->
+              <!-- <button type="button" class="btn btn-outline-primary ms-1">Message</button> -->
+            </div>
+          </div>
+        </div>
+        <!-- <div class="card mb-4 mb-lg-0">
+          <div class="card-body p-0">
+            <ul class="list-group list-group-flush rounded-3">
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fas fa-globe fa-lg text-warning"></i>
+                <p class="mb-0">https://mdbootstrap.com</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-github fa-lg" style="color: #333333;"></i>
+                <p class="mb-0">mdbootstrap</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-twitter fa-lg" style="color: #55acee;"></i>
+                <p class="mb-0">@mdbootstrap</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-instagram fa-lg" style="color: #ac2bac;"></i>
+                <p class="mb-0">mdbootstrap</p>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center p-3">
+                <i class="fab fa-facebook-f fa-lg" style="color: #3b5998;"></i>
+                <p class="mb-0">mdbootstrap</p>
+              </li>
+            </ul>
+          </div>
+        </div> -->
+      </div>
+      <div class="col-lg-8">
+        <div class="card mb-4">
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Name</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ vendor.title }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Email</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ vendor.email }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Call Us</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ vendor.contact }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">Our Address</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ vendor.address }}</p>
+              </div>
+            </div>
+            <hr>
+            <div class="row">
+              <div class="col-sm-3">
+                <p class="mb-0">About Us</p>
+              </div>
+              <div class="col-sm-9">
+                <p class="text-muted mb-0">{{ vendor.description|safe }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                </p>
+                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                <div class="progress rounded mb-2" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card mb-4 mb-md-0">
+              <div class="card-body">
+                <p class="mb-4"><span class="text-primary font-italic me-1">assigment</span> Project Status
+                </p>
+                <p class="mb-1" style="font-size: .77rem;">Web Design</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 80%" aria-valuenow="80"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Website Markup</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 72%" aria-valuenow="72"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">One Page</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 89%" aria-valuenow="89"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Mobile Template</p>
+                <div class="progress rounded" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 55%" aria-valuenow="55"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <p class="mt-4 mb-1" style="font-size: .77rem;">Backend API</p>
+                <div class="progress rounded mb-2" style="height: 5px;">
+                  <div class="progress-bar" role="progressbar" style="width: 66%" aria-valuenow="66"
+                    aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </div>
+</section>
+<!-- Vendor Detail Section End -->
+
+<!-- Vendor Detail Products List Section Start -->
+<section class="vendor-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+                                <span>Sort By</span>
+                                <select>
+                                    <option value="0">Default</option>
+                                    <option value="0">Default</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__found">
+                                <h6>This vendor has <span>{{products.count}}</span>product{{products.count|pluralize}}</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            <div class="filter__option">
+                                <span class="icon_grid-2x2"></span>
+                                <span class="icon_ul"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+
+                    {% for p in products %}
+                    {% if p.get_percentage > 0 %}
+
+                    <div class="col-lg-3 col-md-4 col-sm-4">
+                        <div class="main__product__item">
+                            <a href="{% url 'core:products-detail' p.pid %}">
+                                <div class="main__product__item__pic set-bg"
+                                    data-setbg="{{p.image.url}}">
+                                    <div class="main__product__percent">-{{p.get_percentage|floatformat:0}}%</div>
+                                    <!-- <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <input type="hidden" value="1" class="product-quantity-{{ p.id }}" id="product-quantity">
+                                        <input type="hidden" value="{{ p.pid }}" class="product-pid-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.image.url }}" class="product-image-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.id }}" class="product-id-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.title }}" class="product-title-{{ p.id }}">
+                                        <li><button data-index='{{ p.id }}' class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i></button></li>
+                                    </ul> -->
+                                </div>
+                            </a>
+                            <div class="main__product__item__text">
+                                <span>{{p.category.title}}</span>
+                                <h5><a href="{% url 'core:products-detail' p.pid %}">{{p.title}}</a></h5>
+                                <span style="display: none" class="current-product-price-{{ p.id }}">{{p.price}}</span>
+                                <div class="product__item__price">${{p.price}} <span>${{p.old_price}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% else %}
+
+                    <div class="col-lg-3 col-md-4 col-sm-4">
+                        <div class="main__product__item">
+                            <a href="{% url 'core:products-detail' p.pid %}">
+                                <div class="main__product__item__pic set-bg"
+                                    data-setbg="{{p.image.url}}">
+                                    <!-- <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <input type="hidden" value="1" class="product-quantity-{{ p.id }}" id="product-quantity">
+                                        <input type="hidden" value="{{ p.pid }}" class="product-pid-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.image.url }}" class="product-image-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.id }}" class="product-id-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.title }}" class="product-title-{{ p.id }}">
+                                        <li><button data-index='{{ p.id }}' class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i></button></li>
+                                    </ul> -->
+                                </div>
+                            </a>
+                            <div class="main__product__item__text">
+                                <span>{{p.category.title}}</span>
+                                <h5><a href="{% url 'core:products-detail' p.pid %}">{{p.title}}</a></h5>
+                                <span style="display: none" class="current-product-price-{{ p.id }}">{{p.price}}</span>
+                                <div class="product__item__price">${{p.price}}</div>
+                            </div>
+                        </div>
+                    </div> 
+
+                    {% endif %}
+                    {% endfor %}
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Vendor Detail Products List Section End -->
+
+{% endblock content %}

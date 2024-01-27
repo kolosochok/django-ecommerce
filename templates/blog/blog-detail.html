@@ -1,0 +1,219 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+{% block title %}{{ post.title }}{% endblock title %}
+
+{% block content %}
+
+{% include 'partials/hero-section.html' %}
+
+<!-- Blog Details Hero Begin -->
+<section class="blog-details-hero set-bg" data-setbg="{% static 'assets/img/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="blog__details__hero__text">
+                    <h2>{{ post.title }}</h2>
+                    <ul>
+                        <li>By {{ post.user.name }}</li>
+                        <li>{{ post.date_created|date:"d M, Y" }}</li>
+                        <li>{{ comments.count }} Comments</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Details Hero End -->
+
+<!-- Blog Details Section Begin -->
+<section class="blog-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5 order-md-1 order-2 mt-5">
+                <div class="blog__sidebar">
+                    <div class="blog__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>Categories</h4>
+                        {% for c in blog_categories %}
+                        <ul>
+                            <li><a href="{% url 'blog:blog-category' c.cid %}">{{ c.title }} ({{c.categories.count}})</a></li>
+                        </ul>
+                        {% endfor %}
+                    </div>
+                    <!-- <div class="blog__sidebar__item">
+                        <h4>Recent News</h4>
+                        <div class="blog__sidebar__recent">
+                            <a href="#" class="blog__sidebar__recent__item">
+                                <div class="blog__sidebar__recent__item__pic">
+                                    <img src="img/blog/sidebar/sr-1.jpg" alt="">
+                                </div>
+                                <div class="blog__sidebar__recent__item__text">
+                                    <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
+                                    <span>MAR 05, 2019</span>
+                                </div>
+                            </a>
+                            <a href="#" class="blog__sidebar__recent__item">
+                                <div class="blog__sidebar__recent__item__pic">
+                                    <img src="img/blog/sidebar/sr-2.jpg" alt="">
+                                </div>
+                                <div class="blog__sidebar__recent__item__text">
+                                    <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
+                                    <span>MAR 05, 2019</span>
+                                </div>
+                            </a>
+                            <a href="#" class="blog__sidebar__recent__item">
+                                <div class="blog__sidebar__recent__item__pic">
+                                    <img src="img/blog/sidebar/sr-3.jpg" alt="">
+                                </div>
+                                <div class="blog__sidebar__recent__item__text">
+                                    <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
+                                    <span>MAR 05, 2019</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div> -->
+                    <div class="blog__sidebar__item">
+                        <h4>By Tags</h4>
+                        <div class="blog__sidebar__item__tags">
+                            {% for random_tag in random_blog_tags %}
+                            <a href="{% url 'blog:blog-tag' random_tag.slug %}">#{{ random_tag.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7 order-md-1 order-1">
+                <div class="blog__details__text">
+                    <img src="{{ post.image.url }}" alt="">
+                    <p>{{ post.subtitle }}</p>
+                    <p>{{ post.body|safe }}</p>
+                </div>
+                <div class="blog__details__content">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="blog__details__author">
+                                <div class="blog__details__author__pic">
+                                    <img src="{{ post.user.image.url }}" alt="">
+                                </div>
+                                <div class="blog__details__author__text">
+                                    <h6>{{ post.user.name }}</h6>
+                                    <span>{{ post.user.username }}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="blog__details__widget">
+                                <ul>
+                                    <li class="blog__category"><span>Categories:</span> {% for category in post.categories.all %}• <a href="{% url 'blog:blog-category' category.cid %}">{{ category.title }}</a> {% endfor %}</li>
+                                    <li><span>Tags:</span> {% for tag in post.tags.all %}<a href="{% url 'blog:blog-tag' tag.slug %}" class="tag">#{{tag.name}}</a> {% endfor %}</li>        
+                                </ul>
+                                <div class="blog__details__social">
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                                    <a href="#"><i class="fa fa-envelope"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 mt-5">
+                            <h4 style="color: #1c1c1c;" class="text-center font-weight-bold mb-3">Comments</h4>
+                          <div class="card">
+                            {% for c in comments %}
+                            <div class="card-body">
+                                
+                              <div class="d-flex flex-start align-items-center">
+                                <img class="rounded-circle shadow-1-strong mr-3" src="{{c.user.image.url}}" alt="avatar" width="60" height="60" />
+                                <div>
+                                  <h6 class="font-weight-bold mb-1">{{c.user.username}}</h6>
+                                  <p class="text-muted small mb-0">
+                                    {{c.date_created|date:"d M, Y"}}
+                                  </p>
+                                </div>
+                              </div>
+                                
+                              <p class="mt-3">
+                                {{c.body}}
+                              </p>
+
+                            </div>
+                            <hr class="my-0">
+                            {% endfor %}
+                            {% if request.user.is_authenticated %}
+                            {% if make_comment == True %}
+                            <div class="card-footer py-3 border-0" style="background-color: #f8f9fa;">
+                                <strong id="blogCommentRes"></strong>
+                                <form class="hide-comment" action="{% url 'blog:ajax-add-comment' post.id %}" id="blogCommentForm" method="POST">
+                                {% csrf_token %}
+                                  <div class="d-flex flex-start w-100">
+                                    
+                                    <div class="form-outline w-100">
+                                      <!-- <textarea class="form-control" id="textAreaExample" rows="4" style="background: #fff;"></textarea> -->
+                                      {{comment_form.comment}}
+                                      <label class="form-label" for="textAreaExample">Message</label>
+                                    </div>
+                                  </div>
+                                  <div class="float-right">
+                                    <button type="submit" class="btn btn-primary btn-sm">Post comment</button>
+                                    <!-- <button type="button" class="btn btn-outline-primary btn-sm">Cancel</button> -->
+                                  </div>
+                                </form>
+                            </div>
+                            {% endif %}
+                            {% else %}
+                            <strong class="text-center">To leave comments, you should be authenticated! Please create or log into your account.</strong>
+                            {% endif %}
+                          </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Details Section End -->
+
+<!-- Related Blog Section Begin -->
+<section class="related-blog spad">
+    <div class="container">
+        <div class="row">
+            {% if posts %}
+            <div class="col-lg-12">
+                <div class="section-title related-blog-title">
+                    <h2>Post You May Like</h2>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+            {% for p in posts %}
+            <div class="col-lg-4 col-md-4 col-sm-6">
+                <div class="blog__item">
+                    <div class="blog__item__pic">
+                        <a href="{% url 'blog:blog-detail' p.pid %}"><img src="{{ p.image.url }}" alt=""></a>
+                    </div>
+                    <div class="blog__item__text">
+                        <ul>
+                            <li><i class="fa fa-calendar-o"></i> {{ p.date_created|date:"d M, Y" }}</li>
+                            <li><i class="fa fa-comment-o"></i> {{ p.comments.count }}</li>
+                        </ul>
+                        <h5><a href="{% url 'blog:blog-detail' p.pid %}">{{ p.title }}</a></h5>
+                        <p>{{ p.subtitle|truncatechars:150 }} </p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+        </div>
+    </div>
+</section>
+<!-- Related Blog Section End -->
+<!-- <script src="{% static './assets/js/bootstrap5.min.js' %}"></script> -->
+{% endblock content %}

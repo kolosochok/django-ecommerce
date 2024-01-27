@@ -1,0 +1,94 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Vendors{% endblock title %}
+
+{% block content %}
+{% include 'partials/hero-section.html' %}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'assets/img/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Vendors</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'core:index' %}">Home</a>
+                        <span class="breadcrumb__separator"><i class="fa fa-angle-right"></i></span>
+                        <span>Vendors</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Vendor Section Start -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <!-- <div class="category__list__search">
+                    <form action="#">
+                        <input type="text" placeholder="Search...">
+                        <button type="submit"><span class="icon_search"></span></button>
+                    </form>
+                </div> -->
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+                                <span>Sort By</span>
+                                <select>
+                                    <option value="0">Default</option>
+                                    <option value="0">Default</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__found">
+                                <h6><span>{{vendors.count}}</span>Vendor{{vendors.count|pluralize}} found</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            <div class="filter__option">
+                                <span class="icon_grid-2x2"></span>
+                                <span class="icon_ul"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    {% for v in vendors %}
+
+                    <div class="col-lg-3 col-md-12 col-sm-12">
+                        <div class="vendor__item">
+                            <a href="{% url 'core:vendor-detail' v.vid %}">
+                                <div class="vendor__item__pic set-bg" data-setbg="{{v.image.url}}"></div>
+                            </a>
+                            <div class="vendor__item__text">
+                                <span>Since {{v.date|date:'Y'}}</span>
+                                <h5><a href="{% url 'core:vendor-detail' v.vid %}"><strong>{{v.title}}</strong></a></h5>
+                                <span>Our address: {{v.address}}</span>
+                                <span>Call us: {{v.contact}}</span>
+                            </div>
+                        </div>
+                    </div> 
+
+                    {% endfor %}  
+                      
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Vendor Section End -->
+
+
+
+
+{% endblock content %}

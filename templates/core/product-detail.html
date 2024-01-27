@@ -1,0 +1,328 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}{{ product.title }}{% endblock title %}
+
+{% block content %}
+
+{% include 'partials/hero-section.html' %}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'assets/img/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>{{ product.title }}</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'core:index' %}">Home</a>
+                        <span class="breadcrumb__separator"><i class="fa fa-angle-right"></i></span>
+                        <a href="{% url 'core:products-list' %}">Products</a>
+                        <span class="breadcrumb__separator"><i class="fa fa-angle-right"></i></span>
+                        <span>{{ product.title }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__pic">
+                    <div class="product__details__pic__item">
+                        <img class="product__details__pic__item--large"
+                            src="{{ product.image.url }}" alt="">
+                    </div>
+                    <div class="product__details__pic__slider owl-carousel">
+                    	<img data-imgbigurl="{{product.image.url}}"
+                            src="{{ product.image.url }}" alt="">
+                    	{% for p in p_image %}
+                        <img data-imgbigurl="{{ p.images.url }}"
+                            src="{{ p.images.url }}" alt="">
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="product__details__text">
+                    <h3>{{ product.title }}</h3>
+                    <div class="product__details__rating">
+                        <!-- {% if average_rating.rating %}
+                        <h6>This product has {{average_rating.rating|floatformat:1}} out of 5.0 rate.</h6>               
+                        {% else %}
+                        <h6>This product has no reviews yet.</h6>
+                        {% endif %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span> -->
+                        {% if average_rating.rating == 5 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>               
+                        <i class="fa fa-star"></i>
+                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
+                        {% elif average_rating.rating >= 4 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>               
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
+                        {% elif average_rating.rating >= 3 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>{% elif average_rating.rating >= 2 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
+                        {% elif average_rating.rating >= 1 %}
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
+                        {% else %}
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>
+                        <i class="fa fa-star-o"></i>         
+                        <i class="fa fa-star-o"></i>
+                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
+                        {% endif %}
+                    </div>
+                    <span style="display: none" class="current-product-price-{{ product.id }}">{{product.price}}</span>
+                    {% if product.get_percentage > 0 %}
+                    <div class="product__details__price">${{product.price}}<span>${{product.old_price}}</span></div>
+                    {% else %}
+                    <div class="product__details__price">${{product.price}}</div>
+                    {% endif %}
+                    <p>{{product.description|truncatechars:150|safe}}</p>
+                    {% if product.stock_count %}
+                    <div class="product__details__quantity">
+                        <div class="quantity">
+                            <div class="pro-qty">
+                                <input type="text" value="1" class="product-quantity-{{ product.id }}">
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" value="{{ product.pid }}" class="product-pid-{{ product.id }}">
+                    <input type="hidden" value="{{ product.image.url }}" class="product-image-{{ product.id }}">
+                    <input type="hidden" value="{{ product.id }}" class="product-id-{{ product.id }}">
+                    <input type="hidden" value="{{ product.title }}" class="product-title-{{ product.id }}">
+                    <button class="primary-btn add-to-cart-btn" data-index="{{ product.id }}">ADD TO CARD</button>
+                    {% else %}
+                    <button style="opacity: 0.5; cursor: not-allowed;" class="primary-btn add-to-cart-btn" disabled>OUT OF STOCK</button>
+                    {% endif %}
+                    <!-- <a href="" class="primary-btn">ADD TO CARD</a> -->
+                    
+                    {% if request.user.is_authenticated %}
+                    <button style="border-style: none;" class="heart-icon add-to-wishlist" data-product-item="{{ product.id }}"><span class="icon_heart_alt"></span></button>
+                    {% else %}
+                    <a href="{% url 'userauths:sing-in' %}" class="heart-icon"><span class="icon_heart_alt"></span></a>
+                    {% endif %}
+                    <ul>
+                        <li><b>Availability</b> <span>{{product.stock_count}} Item{{product.stock_count|pluralize}} In Stock</span></li>
+                        <li><b>Shipping</b> <span>{{product.shipping}} day{{product.shipping|pluralize}} shipping. <samp>Free pickup today</samp></span></li>
+                        {% if product.weight %}
+                        <li><b>Weight</b> <span>{{product.weight}} kg</span></li>
+                        {% endif %}
+                        {% if product.tags.all %}
+                        <li><b>Tags</b> <span>{% for tag in product.tags.all %}<a href="{% url 'core:tags' tag.slug %}" class="tag">#{{tag.name}}</a> {% endfor %}</span></li>
+                        {% endif %}
+                        <li><b>Share on</b>
+                            <div class="share">
+                                <a href="#"><i class="fa fa-facebook"></i></a>
+                                <a href="#"><i class="fa fa-twitter"></i></a>
+                                <a href="#"><i class="fa fa-instagram"></i></a>
+                                <a href="#"><i class="fa fa-pinterest"></i></a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
+                                aria-selected="true">Description</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
+                                aria-selected="false">Information</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                                aria-selected="false">Reviews <span>({{reviews.count}})</span></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Product Description</h6>
+                                <p>{{product.description|safe}}</p>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Product Infomation</h6>
+                                <h6>About Vendor</h6>
+                                <p><strong>Vendor:</strong> {{product.vendor.title}}</p>
+                                <p><strong>Address:</strong> {{product.vendor.address}}</p>
+                                <p><strong>Contact:</strong> {{product.vendor.contact}}</p>
+                                <h6>About Product</h6>
+
+                                {% if product.mfd %}
+                                <p><strong>Manufacturing Date:</strong> {{product.mfd|date:"d M, Y"}}</p>
+                                {% endif %}
+
+                                {% if product.life %}
+                                <p><strong>Shelf Life:</strong> {{product.life}} Day{{product.life|pluralize}}</p>
+                                {% endif %}
+
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                <h6>Product Reviews</h6>
+
+                                {% if average_rating.rating %}
+                                <h6>This product has {{average_rating.rating|floatformat:1}} out of 5.0 rate.</h6>               
+                                {% else %}
+                                <h6>This product has no reviews yet.</h6>
+                                {% endif %}
+                                <div class="reviews-block">
+                                {% for r in reviews %}
+                                
+                                    <div class="comment-block">
+                                    
+                                    <img src="{{r.user.image.url}}" alt="User" style="width: 55px; height: 55px;">
+                                    <span>{{r.user.username}}</span>
+                                    <span> - </span>
+                                    <span>{{r.date|date:"d M, Y"}}</span>
+                                    <span> - </span>
+                                    {% for s in r.rating|ljust:r.rating %}
+                                    <i class="fas fa-star"></i>
+                                    {% endfor %}
+                                    <p>{{r.review}}</p>
+                                    </div>
+                                
+                                {% endfor %}
+                                </div>
+                                {% if request.user.is_authenticated %}
+                                {% if make_review == True %}
+                                <!-- <h5 class="add-review">Add Review</h5> -->
+                                <strong id="reviewRes"></strong>
+                                <form class="hide-review" action="{% url 'core:ajax-add-review' product.id %}" id="commentForm" method="POST">
+                                    {% csrf_token %}
+                                    <div>{{review_form.review}}</div>
+                                    <div class="rating-review-submit">
+                                        <div>{{review_form.rating}}</div>
+                                        <button class="primary-btn" type="submit">Submit review</button>  
+                                    </div>           
+                                </form>
+                                {% endif %}
+                                {% else %}
+                                <strong>To leave comments, you should be authenticated! Please create or log into your account.</strong>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Details Section End -->
+
+<!-- Related Product Section Begin -->
+<section class="related-product">
+    <div class="container">
+        <div class="row">
+            {% if products %}
+            <div class="col-lg-12">
+                <div class="section-title related__product__title">
+                    <h2>Related Product</h2>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <div class="row">
+
+            {% for p in products %}
+            {% if p.get_percentage > 0 %}
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="main__product__item">
+                    <a href="{% url 'core:products-detail' p.pid %}">
+                        <div class="main__product__item__pic set-bg"
+                            data-setbg="{{p.image.url}}">
+                            <div class="main__product__percent">-{{p.get_percentage|floatformat:0}}%</div>
+                            <!-- <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <input type="hidden" value="1" class="product-quantity-{{ p.id }}" id="product-quantity">
+                                <input type="hidden" value="{{ p.pid }}" class="product-pid-{{ p.id }}">
+                                <input type="hidden" value="{{ p.image.url }}" class="product-image-{{ p.id }}">
+                                <input type="hidden" value="{{ p.id }}" class="product-id-{{ p.id }}">
+                                <input type="hidden" value="{{ p.title }}" class="product-title-{{ p.id }}">
+                                <li><button data-index='{{ p.id }}' class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i></button></li>
+                            </ul> -->
+                        </div>
+                    </a>
+                    <div class="main__product__item__text">
+                        <span>{{p.category.title}}</span>
+                        <h5><a href="{% url 'core:products-detail' p.pid %}">{{p.title}}</a></h5>
+                        <span style="display: none" class="current-product-price-{{ p.id }}">{{p.price}}</span>
+                        <div class="product__item__price">${{p.price}} <span>${{p.old_price}}</span></div>
+                    </div>
+                </div>
+            </div>
+
+            {% else %}
+
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="main__product__item">
+                    <a href="{% url 'core:products-detail' p.pid %}">
+                        <div class="main__product__item__pic set-bg"
+                            data-setbg="{{p.image.url}}">
+                            <!-- <ul class="product__item__pic__hover">
+                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul> -->
+                        </div>
+                    </a>
+                    <div class="main__product__item__text">
+                        <span>{{p.category.title}}</span>
+                        <h5><a href="{% url 'core:products-detail' p.pid %}">{{p.title}}</a></h5>
+                        <div class="product__item__price">${{p.price}}</div>
+                    </div>
+                </div>
+            </div>
+
+            {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
+</section>
+<!-- Related Product Section End -->
+
+{% endblock content %}

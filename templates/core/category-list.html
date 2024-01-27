@@ -1,0 +1,145 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Categories{% endblock title %}
+
+{% block content %}
+{% include 'partials/hero-section.html' %}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'assets/img/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Categories</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'core:index' %}">Home</a>
+                        <span class="breadcrumb__separator"><i class="fa fa-angle-right"></i></span>
+                        <span>Categories</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Category list Section Begin -->
+<section class="product spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5">
+                <div class="category__list">
+                    <!-- <div class="category__list__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div> -->
+                    <div class="category__list__item">
+                        <h4>Categories</h4>
+                        {% for c in categories %}
+                        <ul>
+                            <li><a href="{% url 'core:category-product-list' c.cid %}">{{c.title}} ({{c.category.count}})</a></li>
+                        </ul>
+                        {% endfor %}
+                    </div>
+                    <!-- <div class="category__list__item">
+                        <h4>Recent News</h4>
+                        <div class="category__list__recent">
+                            <a href="#" class="category__list__recent__item">
+                                <div class="category__list__recent__item__pic">
+                                    <img src="img/blog/sidebar/sr-1.jpg" alt="">
+                                </div>
+                                <div class="category__list__recent__item__text">
+                                    <h6>09 Kinds Of Vegetables<br /> Protect The Liver</h6>
+                                    <span>MAR 05, 2019</span>
+                                </div>
+                            </a>
+                            <a href="#" class="category__list__recent__item">
+                                <div class="category__list__recent__item__pic">
+                                    <img src="img/blog/sidebar/sr-2.jpg" alt="">
+                                </div>
+                                <div class="category__list__recent__item__text">
+                                    <h6>Tips You To Balance<br /> Nutrition Meal Day</h6>
+                                    <span>MAR 05, 2019</span>
+                                </div>
+                            </a>
+                            <a href="#" class="category__list__recent__item">
+                                <div class="category__list__recent__item__pic">
+                                    <img src="img/blog/sidebar/sr-3.jpg" alt="">
+                                </div>
+                                <div class="category__list__recent__item__text">
+                                    <h6>4 Principles Help You Lose <br />Weight With Vegetables</h6>
+                                    <span>MAR 05, 2019</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div> -->
+                    <div class="category__list__item">
+                        <h4>By Tags</h4>
+                        <div class="category__list__item__tags">
+                            {% for random_tag in random_product_tags %}
+                            <a href="{% url 'core:tags' random_tag.slug %}">#{{ random_tag.name }}</a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7">
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+                                <span>Sort By</span>
+                                <select>
+                                    <option value="0">Default</option>
+                                    <option value="0">Default</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__found">
+                                <h6><span>{{ categories.count }}</span> Categorie{{ categories.count|pluralize }} found</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            <div class="filter__option">
+                                <span class="icon_grid-2x2"></span>
+                                <span class="icon_ul"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    {% for c in categories %}
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="category__list__item">
+                            <div class="category__list__pic">
+                                <a href="{% url 'core:category-product-list' c.cid %}"><img src="{{c.image.url}}" alt=""></a>
+                            </div>
+                            <div class="category__list__text">
+                                <h5><a href="{% url 'core:category-product-list' c.cid %}">{{ c.title }}</a></h5>
+                                <p>{{ c.category.count }} Product{{ c.category.count|pluralize }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <!-- <div class="col-lg-12">
+                        <div class="product__pagination category__list__pagination">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Category list Section End -->
+
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Sing In{% endblock title %}
+
+{% block content %}
+
+<div class="auth_wrapper">
+    <header class="auth_header">Sing in</header>
+    <form method="POST" class="auth_form">
+      {% csrf_token %}
+      <div class="field email">
+        <div class="input-area">
+          <input type="text" required name="email" placeholder="Email Address">
+          <i class="icon fas fa-envelope"></i>
+          {% if messages %}
+          <i class="error error-icon fas fa-exclamation-circle"></i>
+          {% endif %}
+        </div>
+        {% if messages %}
+          {% for message in messages %}
+            <div class="error error-txt">
+              <strong>{{ message }}</strong>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class="field password">
+        <div class="input-area">
+          <input type="password" required name="password" placeholder="Password">
+          <i class="icon fas fa-lock"></i>
+          <!-- <i class="error error-icon fas fa-exclamation-circle"></i> -->
+        </div>
+        <!-- <div class="error error-txt">Password can't be blank</div> -->
+      </div>
+      <div class="pass-txt"><a href="#">Forgot password?</a></div>
+      <input type="submit" value="Sing in">
+    </form>
+  <div class="sign-txt">Not yet member? <a href="{% url 'userauths:sing-up' %}">Sign up now</a></div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,61 @@
+
+{% for p in products %}
+{% if p.get_percentage > 0 %}
+
+<div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="main__product__item">
+        <a href="{% url 'core:products-detail' p.pid %}">
+            <div class="main__product__item__pic set-bg">
+                <img src="{{p.image.url}}" alt="">
+                <div class="main__product__percent">-{{p.get_percentage|floatformat:0}}%</div>
+                <!-- <ul class="product__item__pic__hover">
+                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                    <input type="hidden" value="1" class="product-quantity-{{ p.id }}" id="product-quantity">
+                    <input type="hidden" value="{{ p.pid }}" class="product-pid-{{ p.id }}">
+                    <input type="hidden" value="{{ p.image.url }}" class="product-image-{{ p.id }}">
+                    <input type="hidden" value="{{ p.id }}" class="product-id-{{ p.id }}">
+                    <input type="hidden" value="{{ p.title }}" class="product-title-{{ p.id }}">
+                    <li><button data-index='{{ p.id }}' class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i></button></li>
+                </ul> -->
+            </div>
+        </a>
+        <div class="main__product__item__text">
+            <span>{{p.category.title}}</span>
+            <h5><a href="{% url 'core:products-detail' p.pid %}">{{p.title}}</a></h5>
+            <span style="display: none" class="current-product-price-{{ p.id }}">{{p.price}}</span>
+            <div class="product__item__price">${{p.price}} <span>${{p.old_price}}</span></div>
+        </div>
+    </div>
+</div>
+
+{% else %}
+
+<div class="col-lg-4 col-md-6 col-sm-6">
+    <div class="main__product__item">
+        <a href="{% url 'core:products-detail' p.pid %}">
+            <div class="main__product__item__pic set-bg">
+                <img src="{{p.image.url}}" alt="">
+                <!-- <ul class="product__item__pic__hover">
+                    <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                    <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                    <input type="hidden" value="1" class="product-quantity-{{ p.id }}" id="product-quantity">
+                    <input type="hidden" value="{{ p.pid }}" class="product-pid-{{ p.id }}">
+                    <input type="hidden" value="{{ p.image.url }}" class="product-image-{{ p.id }}">
+                    <input type="hidden" value="{{ p.id }}" class="product-id-{{ p.id }}">
+                    <input type="hidden" value="{{ p.title }}" class="product-title-{{ p.id }}">
+                    <li><button data-index='{{ p.id }}' class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i></button></li>
+                </ul> -->
+            </div>
+        </a>
+        <div class="main__product__item__text">
+            <span>{{p.category.title}}</span>
+            <h5><a href="{% url 'core:products-detail' p.pid %}">{{p.title}}</a></h5>
+            <span style="display: none" class="current-product-price-{{ p.id }}">{{p.price}}</span>
+            <div class="product__item__price">${{p.price}}</div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+{% endfor %} 

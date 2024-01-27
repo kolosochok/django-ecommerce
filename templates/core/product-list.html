@@ -1,0 +1,368 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Products{% endblock title %}
+
+{% block content %}
+{% include 'partials/hero-section.html' %}
+
+<!-- Breadcrumb Section Begin -->
+<section class="breadcrumb-section set-bg" data-setbg="{% static 'assets/img/breadcrumb.jpg' %}">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="breadcrumb__text">
+                    <h2>Products</h2>
+                    <div class="breadcrumb__option">
+                        <a href="{% url 'core:index' %}">Home</a>
+                        <span class="breadcrumb__separator"><i class="fa fa-angle-right"></i></span>
+                        <span>Products</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Product Section Begin -->
+<section class="product spad"> 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-5">
+                <div class="sidebar">
+                    <div class="sidebar__item">
+                        <h4>By Categories</h4>
+                        {% for c in categories %}
+                        <ul>
+                            <li>
+                                <div class="checkbox-wrapper-2">
+                                    <input type="checkbox" class="filter-checkbox ikxBAC" data-filter="category" id="checkBox1" value="{{ c.id }}">&nbsp;&nbsp;
+                                    {{c.title}}
+                                </div>
+                            </li>
+                        </ul>
+                        {% endfor %}
+                    </div>
+                    <div class="sidebar__item">
+                        <h4>Price</h4>
+                        <div class="price-range-wrap">
+                            <input type="range" name="" value="{{ min_max_price.price__max }}" id="range" min="{{ min_max_price.price__min }}" max="{{ min_max_price.price__max }}" oninput="max_price.value=this.value">
+                            <div class="price-container">
+                                <strong>${{ min_max_price.price__min|floatformat:2 }}</strong>
+                                <strong>${{ min_max_price.price__max|floatformat:2 }}</strong>
+                            </div>
+                            <input class="price-range-input" type="text" name="" value="{{ min_max_price.price__max|floatformat:2 }}" id="max_price" min="{{ min_max_price.price__min }}" max="{{ min_max_price.price__max }}" placeholder="Current Price" onkeyup="range.value=this.value">
+                            <button class="button-68" id="price-filter-btn" type="button"><strong>Filter By Price</strong></button>
+                            <!-- <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
+                                data-min="10" data-max="540">
+                                <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                                <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
+                            </div> -->
+                            <!-- <div class="range-slider">
+                                <div class="price-input">
+                                    <input type="text" id="minamount">
+                                    <input type="text" id="maxamount">
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="sidebar__item">
+                        <h4>By Vendors</h4>
+                        {% for v in vendors %}
+                        <ul>
+                            <li>
+                                <div class="checkbox-wrapper-2">
+                                    <input type="checkbox" class="filter-checkbox ikxBAC" data-filter="vendor" id="checkBox2" value="{{ v.id }}">&nbsp;&nbsp;
+                                    {{v.title}}
+                                </div>
+                            </li>
+                        </ul>
+                        {% endfor %}
+                    </div>
+                    <!-- <div class="sidebar__item sidebar__item__color--option">
+                        <h4>Colors</h4>
+                        <div class="sidebar__item__color sidebar__item__color--white">
+                            <label for="white">
+                                White
+                                <input type="radio" id="white">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--gray">
+                            <label for="gray">
+                                Gray
+                                <input type="radio" id="gray">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--red">
+                            <label for="red">
+                                Red
+                                <input type="radio" id="red">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--black">
+                            <label for="black">
+                                Black
+                                <input type="radio" id="black">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--blue">
+                            <label for="blue">
+                                Blue
+                                <input type="radio" id="blue">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__color sidebar__item__color--green">
+                            <label for="green">
+                                Green
+                                <input type="radio" id="green">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="sidebar__item">
+                        <h4>Popular Size</h4>
+                        <div class="sidebar__item__size">
+                            <label for="large">
+                                Large
+                                <input type="radio" id="large">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="medium">
+                                Medium
+                                <input type="radio" id="medium">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="small">
+                                Small
+                                <input type="radio" id="small">
+                            </label>
+                        </div>
+                        <div class="sidebar__item__size">
+                            <label for="tiny">
+                                Tiny
+                                <input type="radio" id="tiny">
+                            </label>
+                        </div>
+                    </div> -->
+                    <div class="sidebar__item">
+                        <div class="latest-product__text">
+                            <h4>Latest Products</h4>
+                            <div class="latest-product__slider owl-carousel">
+                                <div class="latest-prdouct__slider__item">
+                                    {% for p in latest_products|slice:":3" %}
+                                    <a href="{% url 'core:products-detail' p.pid %}" class="latest-product__item">
+                                        <div class="latest-product__item__pic">
+                                            <img src="{{p.image.url}}" alt="">
+                                        </div>
+                                        <div class="latest-product__item__text">
+                                            <h6>{{p.title}}</h6>
+
+                                            {% if p.get_percentage > 0 %}
+                                            <span>${{p.price}}</span>
+                                            <span class="item__old__price">${{p.old_price}}</span>
+
+                                            {% else %}
+
+                                            <span>${{p.price}}</span>
+                                            
+                                            {% endif %}      
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                                <div class="latest-prdouct__slider__item">
+                                    {% for p in latest_products|slice:"3:6" %}
+                                    <a href="{% url 'core:products-detail' p.pid %}" class="latest-product__item">
+                                        <div class="latest-product__item__pic">
+                                            <img src="{{p.image.url}}" alt="">
+                                        </div>
+                                        <div class="latest-product__item__text">
+                                            <h6>{{p.title}}</h6>
+
+                                            {% if p.get_percentage > 0 %}
+                                            <span>${{p.price}}</span>
+                                            <span class="item__old__price">${{p.old_price}}</span>
+
+                                            {% else %}
+
+                                            <span>${{p.price}}</span>
+                                            
+                                            {% endif %}      
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                                <div class="latest-prdouct__slider__item">
+                                    {% for p in latest_products|slice:"6:9" %}
+                                    <a href="{% url 'core:products-detail' p.pid %}" class="latest-product__item">
+                                        <div class="latest-product__item__pic">
+                                            <img src="{{p.image.url}}" alt="">
+                                        </div>
+                                        <div class="latest-product__item__text">
+                                            <h6>{{p.title}}</h6>
+
+                                            {% if p.get_percentage > 0 %}
+                                            <span>${{p.price}}</span>
+                                            <span class="item__old__price">${{p.old_price}}</span>
+
+                                            {% else %}
+
+                                            <span>${{p.price}}</span>
+                                            
+                                            {% endif %}      
+                                        </div>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 col-md-7">
+                <div class="product__discount">
+                    <div class="section-title product__discount__title">
+                        <h2>Sale Off</h2>
+                    </div>
+                    <div class="row">
+                        <div class="product__discount__slider owl-carousel">
+
+                            {% for p in products %}
+                            {% if p.get_percentage %}
+
+                            <div class="col-lg-4">
+                                <div class="product__discount__item">
+                                    <a href="{% url 'core:products-detail' p.pid %}">
+                                        <div class="product__discount__item__pic set-bg"
+                                            data-setbg="{{p.image.url}}">
+                                            <div class="product__discount__percent">-{{p.get_percentage|floatformat:0}}%</div>
+                                            <!-- <ul class="product__item__pic__hover">
+                                                <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                                <input type="hidden" value="1" class="product-quantity-{{ p.id }}" id="product-quantity">
+                                                <input type="hidden" value="{{ p.pid }}" class="product-pid-{{ p.id }}">
+                                                <input type="hidden" value="{{ p.image.url }}" class="product-image-{{ p.id }}">
+                                                <input type="hidden" value="{{ p.id }}" class="product-id-{{ p.id }}">
+                                                <input type="hidden" value="{{ p.title }}" class="product-title-{{ p.id }}">
+                                                <li><button data-index='{{ p.id }}' class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i></button></li>
+                                            </ul> -->
+                                        </div>
+                                    </a>
+                                    <div class="product__discount__item__text">
+                                        <span>{{p.category.title}}</span>
+                                        <h5><a href="{% url 'core:products-detail' p.pid %}">{{p.title}}</a></h5>            
+                                        <div class="product__item__price">${{p.price}} <span>${{p.old_price}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            {% endif %}
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="filter__item">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-5">
+                            <div class="filter__sort">
+                                <span>Sort By</span>
+                                <select>
+                                    <option value="0">Default</option>
+                                    <option value="0">Default</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="filter__found">
+                                <h6><span>{{products.count}}</span> Product{{products.count|pluralize}} found</h6>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-3">
+                            <div class="filter__option">
+                                <span class="icon_grid-2x2"></span>
+                                <span class="icon_ul"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="filtered-product">
+
+                    {% for p in products %}
+                    {% if p.get_percentage > 0 %}
+
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="main__product__item">
+                            <a href="{% url 'core:products-detail' p.pid %}">
+                                <div class="main__product__item__pic set-bg"
+                                    data-setbg="{{p.image.url}}">
+                                    <div class="main__product__percent">-{{p.get_percentage|floatformat:0}}%</div>
+                                    <!-- <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <input type="hidden" value="1" class="product-quantity-{{ p.id }}" id="product-quantity">
+                                        <input type="hidden" value="{{ p.pid }}" class="product-pid-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.image.url }}" class="product-image-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.id }}" class="product-id-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.title }}" class="product-title-{{ p.id }}">
+                                        <li><button data-index='{{ p.id }}' class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i></button></li>
+                                    </ul> -->
+                                </div>
+                            </a>
+                            <div class="main__product__item__text">
+                                <span>{{p.category.title}}</span>
+                                <h5><a href="{% url 'core:products-detail' p.pid %}">{{p.title}}</a></h5>
+                                <span style="display: none" class="current-product-price-{{ p.id }}">{{p.price}}</span>
+                                <div class="product__item__price">${{p.price}} <span>${{p.old_price}}</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% else %}
+
+                    <div class="col-lg-4 col-md-6 col-sm-6">
+                        <div class="main__product__item">
+                            <a href="{% url 'core:products-detail' p.pid %}">
+                                <div class="main__product__item__pic set-bg"
+                                    data-setbg="{{p.image.url}}">
+                                    <!-- <ul class="product__item__pic__hover">
+                                        <li><a href="#"><i class="fa fa-heart"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-retweet"></i></a></li>
+                                        <input type="hidden" value="1" class="product-quantity-{{ p.id }}" id="product-quantity">
+                                        <input type="hidden" value="{{ p.pid }}" class="product-pid-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.image.url }}" class="product-image-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.id }}" class="product-id-{{ p.id }}">
+                                        <input type="hidden" value="{{ p.title }}" class="product-title-{{ p.id }}">
+                                        <li><button data-index='{{ p.id }}' class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i></button></li>
+                                    </ul> -->
+                                </div>
+                            </a>
+                            <div class="main__product__item__text">
+                                <span>{{p.category.title}}</span>
+                                <h5><a href="{% url 'core:products-detail' p.pid %}">{{p.title}}</a></h5>
+                                <span style="display: none" class="current-product-price-{{ p.id }}">{{p.price}}</span>
+                                <div class="product__item__price">${{p.price}}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% endif %}
+                    {% endfor %}    
+
+                </div>
+                <!-- <div class="product__pagination">
+                    <a href="#">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Section End -->
+
+{% endblock content %}

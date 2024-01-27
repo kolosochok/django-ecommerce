@@ -1,0 +1,73 @@
+{% extends 'partials/base.html' %}
+{% load static %}
+
+{% block title %}Sing Up{% endblock title %}
+
+{% block content %}
+
+<div class="auth_wrapper">
+    <header class="auth_header">Sing up</header>
+    <form method="POST" class="auth_form">
+      {% csrf_token %}
+      <div class="field">
+        <div class="input-area">
+          {{ form.email }}
+          <i class="icon fas fa-envelope"></i>
+          {% if form.email.errors %}
+          <i class="error error-icon fas fa-exclamation-circle"></i>
+          {% endif %}
+        </div>
+        {% if form.email.errors %}
+        <div class="error error-txt">
+          <strong>{{ form.email.errors }}</strong>
+        </div>
+        {% endif %}
+      </div>
+      <div class="field">
+        <div class="input-area">
+          {{ form.username }}
+          <i class="icon fas fa-user"></i>
+          {% if form.username.errors %}
+          <i class="error error-icon fas fa-exclamation-circle"></i>
+          {% endif %}
+        </div>
+        {% if form.username.errors %}
+        <div class="error error-txt">
+          <strong>{{ form.username.errors }}</strong>
+        </div>
+        {% endif %}
+      </div>
+      <div class="field">
+        <div class="input-area">
+          {{ form.password1 }}
+          <i class="icon fas fa-lock"></i>
+          {% if form.password1.errors %}
+          <i class="error error-icon fas fa-exclamation-circle"></i>
+          {% endif %}
+        </div>
+        {% if form.password1.errors %}
+        <div class="error error-txt">
+          <strong>{{ form.password1.errors }}</strong>
+        </div>
+        {% endif %}
+      </div>
+      <div class="field">
+        <div class="input-area">
+          {{ form.password2 }}
+          <i class="icon fas fa-lock"></i>
+          {% if form.password2.errors %}
+          <i class="error error-icon fas fa-exclamation-circle"></i>
+          {% endif %}
+        </div>
+        {% if form.password2.errors %}
+        <div class="error error-txt">
+          <strong>{{ form.password2.errors }}</strong>
+        </div>
+        {% endif %}
+      </div>
+      <input type="submit" value="Sing up">
+    </form>
+  <div class="sign-txt">Already have an account? <a href="{% url 'userauths:sing-in' %}">Sing in now</a></div>
+</div>
+
+{% endblock content %}
