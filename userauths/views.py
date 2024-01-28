@@ -69,7 +69,7 @@ def logout_view(request):
 def account(request):
 	if request.method == 'POST':
 		
-		new_username = request.POST.get('username')
+		new_username = request.POST.get('username').replace(" ", "").lower()
 
 		if ' ' in new_username:
 			messages.warning(request, "Username cannot contain spaces.")

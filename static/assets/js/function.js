@@ -74,7 +74,7 @@ $('#blogCommentForm').submit(function(e){
 					_html += '<div class="d-flex flex-start align-items-center">'
 					_html += '<img class="rounded-circle shadow-1-strong mr-3" src="' + res.context.image + '" alt="avatar" width="60" height="60" />'
 					_html += '<div>'
-					_html += '<h6 class="font-weight-bold text-primary mb-1">'+ res.context.user +'</h6>'
+					_html += '<h6 class="font-weight-bold mb-1">'+ res.context.user +'</h6>'
 					_html += '<p class="text-muted small mb-0">'+ time +'</p>'
 					_html += '</div>'
 					_html += '</div>'
