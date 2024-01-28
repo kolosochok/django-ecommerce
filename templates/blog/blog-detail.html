@@ -16,7 +16,7 @@
                     <ul>
                         <li>By {{ post.user.name }}</li>
                         <li>{{ post.date_created|date:"d M, Y" }}</li>
-                        <li>{{ comments.count }} Comments</li>
+                        <li>{{ comments.count }} Comment{{ comments.count|pluralize }}</li>
                     </ul>
                 </div>
             </div>

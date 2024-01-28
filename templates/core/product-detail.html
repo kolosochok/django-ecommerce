@@ -52,58 +52,22 @@
                 <div class="product__details__text">
                     <h3>{{ product.title }}</h3>
                     <div class="product__details__rating">
-                        <!-- {% if average_rating.rating %}
-                        <h6>This product has {{average_rating.rating|floatformat:1}} out of 5.0 rate.</h6>               
-                        {% else %}
-                        <h6>This product has no reviews yet.</h6>
-                        {% endif %}
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
-                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span> -->
-                        {% if average_rating.rating == 5 %}
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>               
-                        <i class="fa fa-star"></i>
-                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
-                        {% elif average_rating.rating >= 4 %}
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>               
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
-                        {% elif average_rating.rating >= 3 %}
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>{% elif average_rating.rating >= 2 %}
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
-                        {% elif average_rating.rating >= 1 %}
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>
-                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
+                        {% if average_rating.rating %}
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= average_rating.rating %}
+                                <i class="fa fa-star"></i>
+                            {% else %}
+                                <i class="fa fa-star-o"></i>
+                            {% endif %}
+                        {% endfor %}
+                        <span>({{ reviews.count }} review{{ reviews.count|pluralize }})</span>
                         {% else %}
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
                         <i class="fa fa-star-o"></i>
-                        <i class="fa fa-star-o"></i>         
                         <i class="fa fa-star-o"></i>
-                        <span>({{reviews.count}} review{{reviews.count|pluralize}})</span>
+                        <i class="fa fa-star-o"></i>
+                        <span>({{ reviews.count }} review{{ reviews.count|pluralize }})</span>
                         {% endif %}
                     </div>
                     <span style="display: none" class="current-product-price-{{ product.id }}">{{product.price}}</span>
@@ -187,21 +151,17 @@
                                 <p><strong>Address:</strong> {{product.vendor.address}}</p>
                                 <p><strong>Contact:</strong> {{product.vendor.contact}}</p>
                                 <h6>About Product</h6>
-
                                 {% if product.mfd %}
                                 <p><strong>Manufacturing Date:</strong> {{product.mfd|date:"d M, Y"}}</p>
                                 {% endif %}
-
                                 {% if product.life %}
                                 <p><strong>Shelf Life:</strong> {{product.life}} Day{{product.life|pluralize}}</p>
                                 {% endif %}
-
                             </div>
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
                                 <h6>Product Reviews</h6>
-
                                 {% if average_rating.rating %}
                                 <h6>This product has {{average_rating.rating|floatformat:1}} out of 5.0 rate.</h6>               
                                 {% else %}
@@ -209,9 +169,7 @@
                                 {% endif %}
                                 <div class="reviews-block">
                                 {% for r in reviews %}
-                                
                                     <div class="comment-block">
-                                    
                                     <img src="{{r.user.image.url}}" alt="User" style="width: 55px; height: 55px;">
                                     <span>{{r.user.username}}</span>
                                     <span> - </span>
@@ -222,12 +180,11 @@
                                     {% endfor %}
                                     <p>{{r.review}}</p>
                                     </div>
-                                
                                 {% endfor %}
                                 </div>
                                 {% if request.user.is_authenticated %}
                                 {% if make_review == True %}
-                                <!-- <h5 class="add-review">Add Review</h5> -->
+                                <h5 class="add-review">Add Review</h5>
                                 <strong id="reviewRes"></strong>
                                 <form class="hide-review" action="{% url 'core:ajax-add-review' product.id %}" id="commentForm" method="POST">
                                     {% csrf_token %}
@@ -264,10 +221,8 @@
             {% endif %}
         </div>
         <div class="row">
-
             {% for p in products %}
             {% if p.get_percentage > 0 %}
-
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="main__product__item">
                     <a href="{% url 'core:products-detail' p.pid %}">
@@ -294,9 +249,7 @@
                     </div>
                 </div>
             </div>
-
             {% else %}
-
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="main__product__item">
                     <a href="{% url 'core:products-detail' p.pid %}">
@@ -316,10 +269,8 @@
                     </div>
                 </div>
             </div>
-
             {% endif %}
             {% endfor %}
-
         </div>
     </div>
 </section>
