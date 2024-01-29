@@ -319,11 +319,18 @@ $(document).ready(function (){
 
 // Delete symbols from cart quantity
 
-$(document).on('input', '.shoping__cart__quantity input[type="text"]', function() {
+$(document).on('input', '.shoping__cart__quantity input[type="text"], .product__details__quantity input[type="text"]', function() {
     var value = $(this).val();
-    // Видаляємо всі символи, які не є цифрами
     var cleanedValue = value.replace(/[^\d]/g, '');
-    // Оновлюємо значення поля вводу
+    $(this).val(cleanedValue);
+});
+
+// Username Validation
+
+$(document).on('input', '.username-validation', function() {
+    var value = $(this).val();
+    var cleanedValue = value.replace(/[^a-zA-Z0-9]/g, '');
+    cleanedValue = cleanedValue.substring(0, 12);
     $(this).val(cleanedValue);
 });
 
