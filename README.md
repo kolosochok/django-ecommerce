@@ -4,7 +4,7 @@ This project is a comprehensive solution for building and managing a robust e-co
 
 ## Demo
 
-valleys.pythonanywhere.com
+https://valleys.pythonanywhere.com
 
 ## Overview
 
