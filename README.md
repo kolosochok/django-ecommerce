@@ -10,10 +10,6 @@ https://valleys.pythonanywhere.com
 
 This project aims to provide a solid foundation to create a feature-rich and scalable e-commerce website. Leveraging the power of Django, a high-level web framework written in Python, and integrating dynamic front-end interactions with JavaScript and jQuery, our application delivers a seamless and responsive user experience.
 
-## Features
-
-- All you need
-
 ## Tech Stack
 
 - Backend: Python, Django
@@ -21,5 +17,12 @@ This project aims to provide a solid foundation to create a feature-rich and sca
 - Database: SQLite
 
 ## Installation Guide
+
+
+```
+git clone url
+cd django-ecommerce
+```
+
 
 
