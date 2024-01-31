@@ -16,13 +16,4 @@ This project aims to provide a solid foundation to create a feature-rich and sca
 - Frontend: JavaScript, jQuery
 - Database: SQLite
 
-## Installation Guide
-
-
-```
-git clone url
-cd django-ecommerce
-```
-
-
 
