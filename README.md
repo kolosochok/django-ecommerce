@@ -19,6 +19,7 @@ This project aims to provide a solid foundation to create a feature-rich and sca
 ## Features📚
 
 - User Authentication
+- User Profile
 - Products / Product Detail Page
 - Vendors / Vendor Detail Page
 - Products / Blogs Tags
@@ -26,7 +27,6 @@ This project aims to provide a solid foundation to create a feature-rich and sca
 - Improved Admin Panel
 - Product Reviews / Blog Comments
 - Products Filter
-- User Profile
 - Search Functionality
 - Shopping Cart
 - Wishlist
