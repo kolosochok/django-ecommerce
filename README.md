@@ -20,15 +20,17 @@ This project aims to provide a solid foundation to create a feature-rich and sca
 
 - User Authentication
 - User Profile
-- Products / Product Detail Page
-- Vendors / Vendor Detail Page
-- Products / Blogs Tags
-- Category / Category List Page
-- Improved Admin Panel
-- Product Reviews / Blog Comments
-- Products Filter
-- Search Functionality
 - Shopping Cart
 - Wishlist
-- Related Products / Blog Posts
 - Product Discount
+- Products / Vendors Page
+- Product detail / Vendor detail Page
+- Tags for Product and Blog
+- Category list Page
+- Improved Admin Panel
+- Product Reviews
+- Blog post Comments
+- Products Filter
+- Search Functionality
+- Related Products
+- Related Blog posts
