@@ -16,4 +16,19 @@ This project aims to provide a solid foundation to create a feature-rich and sca
 - Frontend: JavaScript, jQuery
 - Database: SQLite
 
+## Features📚
 
+- User Authentication
+- Products / Product Detail Page
+- Vendors / Vendor Detail Page
+- Products / Blogs Tags
+- Category / Category List Page
+- Improved Admin Panel
+- Product Reviews / Blog Comments
+- Products Filter
+- User Profile
+- Search Functionality
+- Shopping Cart
+- Wishlist
+- Related Products / Blog Posts
+- Product Discount
