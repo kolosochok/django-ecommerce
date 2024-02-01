@@ -6,6 +6,8 @@ This project is a comprehensive solution for building and managing a robust e-co
 
 https://valleys.pythonanywhere.com
 
+***Thanks Colorlib for this beautiful free HTML template**
+
 **Homepage**
 ![изображение](https://github.com/kolosochok/django-ecommerce/assets/148413963/a090bc2a-eaa8-47ca-97be-5560d857df6e)
 
@@ -41,3 +43,23 @@ This project aims to provide a solid foundation to create a feature-rich and sca
 - Search Functionality
 - Related Products
 - Related Blog posts
+
+## Setup Instructions
+
+Clone repo:
+`git clone https://github.com/kolosochok/django-ecommerce.git`
+
+Go to directory:
+`cd django-ecommerce`
+
+Create virtual env:
+`python -m venv venv`
+
+Install all requerements:
+`pip install -r req.txt`
+
+Generate new secret key:
+`python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())'`
+
+Create `.env` file and past secret key:
+`SECRET_KEY='secret-key'`
