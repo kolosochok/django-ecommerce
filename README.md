@@ -6,6 +6,9 @@ This project is a comprehensive solution for building and managing a robust e-co
 
 https://valleys.pythonanywhere.com
 
+**Homepage**
+![изображение](https://github.com/kolosochok/django-ecommerce/assets/148413963/67ac6b8e-f217-4210-afd1-10b4adfa66ba)
+
 **Admin Panel**
 ![изображение](https://github.com/kolosochok/django-ecommerce/assets/148413963/505d1126-a2ed-4dec-b6b0-eb68be823a3d)
 
