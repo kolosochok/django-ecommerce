@@ -4,7 +4,7 @@ This project is a comprehensive solution for building and managing a robust e-co
 
 ## Demo💫
 
-https://valleys.pythonanywhere.com
+🌐👉https://valleys.pythonanywhere.com
 
 **Homepage**
 ![изображение](https://github.com/kolosochok/django-ecommerce/assets/148413963/a090bc2a-eaa8-47ca-97be-5560d857df6e)
@@ -12,12 +12,9 @@ https://valleys.pythonanywhere.com
 **Admin Panel**
 ![изображение](https://github.com/kolosochok/django-ecommerce/assets/148413963/505d1126-a2ed-4dec-b6b0-eb68be823a3d)
 
-***Thanks Colorlib for this beautiful free HTML template**
-
 ## Overview⚡️
 
 This project aims to provide a solid foundation to create a feature-rich and scalable e-commerce website. Leveraging the power of Django, a high-level web framework written in Python, and integrating dynamic front-end interactions with JavaScript and jQuery, our application delivers a seamless and responsive user experience.
-
 
 ## Tech Stack🚀
 
