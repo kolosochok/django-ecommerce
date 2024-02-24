@@ -41,3 +41,51 @@ This project aims to provide a solid foundation to create a feature-rich and sca
 - Related Products
 - Related Blog posts
 
+## Installation Guide📚
+
+1. Clone and change to the directory:
+
+```
+git clone https://github.com/kolosochok/django-ecommerce
+cd django-ecommerce
+```
+
+2. Create and activate a virtual environment:
+
+Unix based systems:
+```
+virtualenv env
+source env/bin/activate
+```
+
+Windows:
+```
+python -m venv env
+source env/Scripts/activate
+```
+
+3. Install Python requirements:
+
+`pip install -r requirements.txt`
+
+4. Create a SECRET_KEY and copy:
+
+`python secret_key.py`
+
+5. Create a `.env` file and add a SECRET_KEY value to `.env`:
+
+`SECRET_KEY=generated-secret-key`
+
+6. Migrate DB:
+
+`python manage.py migrate`
+
+7. To create superuser:
+
+`python manage.py createsuperuser`
+
+8. Run application:
+
+`python manage.py`
+
+*happy coding*
