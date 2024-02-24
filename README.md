@@ -66,26 +66,26 @@ source env/Scripts/activate
 
 3. Install Python requirements:
 
-`pip install -r requirements.txt`
+```pip install -r requirements.txt```
 
 4. Create a SECRET_KEY and copy:
 
-`python secret_key.py`
+```python secret_key.py```
 
 5. Create a `.env` file and add a SECRET_KEY value to `.env`:
 
-`SECRET_KEY=generated-secret-key`
+```SECRET_KEY=generated-secret-key```
 
 6. Migrate DB:
 
-`python manage.py migrate`
+```python manage.py migrate```
 
 7. To create superuser:
 
-`python manage.py createsuperuser`
+```python manage.py createsuperuser```
 
 8. Run application:
 
-`python manage.py`
+```python manage.py```
 
 *happy coding*
