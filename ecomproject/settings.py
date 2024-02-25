@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     # Thirt Party
     'taggit',
     'ckeditor',
+    'easyaudit',
 
     # Custom Apps
     'core',
@@ -60,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
+    'easyaudit.middleware.easyaudit.EasyAuditMiddleware',
 ]
 
 ROOT_URLCONF = 'ecomproject.urls'
