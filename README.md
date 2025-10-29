@@ -97,7 +97,7 @@ python manage.py createsuperuser
 8. Run application:
 
 ```
-python manage.py
+python manage.py runserver
 ```
 
 *happy coding*
